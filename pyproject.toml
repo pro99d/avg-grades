@@ -5,9 +5,10 @@ description = ""
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
-    { name = "Oleg", email = "you@example.com" }
+    { name = "Oleg", email = "oleh.spitzin@yandex.ru" }
 ]
 dependencies = [
+    "certifi>=2026.1.4",
     "flet>=0.80.5",
     "pyinstaller<6.8",
 ]
@@ -21,7 +22,7 @@ dev = [
 
 [tool.flet]
 org = "com.mycompany"
-product = "avg"
+product = "Калькулятор среднего балла"
 company = "Flet"
 copyright = "Copyright (C) 2023-2026 by Flet"
 
