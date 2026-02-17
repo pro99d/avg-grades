@@ -10,7 +10,6 @@ authors = [
 dependencies = [
     "certifi>=2026.1.4",
     "flet>=0.80.5",
-    "pyinstaller<6.8",
 ]
 
 [dependency-groups]
@@ -28,3 +27,6 @@ copyright = "Copyright (C) 2023-2026 by Flet"
 
 [tool.flet.app]
 path = "src"
+
+[tool.flet.build]
+python-packages = ["certifi"]
