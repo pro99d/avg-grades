@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     button_theme = ft.ButtonStyle(ft.Colors.BLACK, ft.Colors.BLUE_500)
-    text_theme = ft.TextStyle(20)
+    text_theme = ft.TextStyle(15)
     grades: list[tuple[ft.TextField, ft.TextField]] = []
     def add_grade(e):
         row = ft.Row()
@@ -11,8 +11,8 @@ def main(page: ft.Page):
             page.remove(row)
             grades.remove((grade_txt, weight))
             page.update()
-        grade_txt = ft.TextField(label= "Оценка", value= "4", on_change= calculate)
-        weight = ft.TextField(label= "Вес", value= "1", on_change= calculate)
+        grade_txt = ft.TextField(label= "Оценка", value= "4", on_change= calculate, width= 100)
+        weight = ft.TextField(label= "Вес", value= "1", on_change= calculate, width= 100)
         delete_btn = ft.IconButton(icon= ft.icons.Icons.DELETE, on_click= delete)
         row.controls = [grade_txt, weight, delete_btn]
         grades.append((grade_txt, weight))
@@ -43,11 +43,12 @@ def main(page: ft.Page):
         add_grade(0)
 
     row = ft.Row()
-    add_grade = ft.TextButton(content= ft.Text(value= "Добавить оценку", style= text_theme), style= button_theme, on_click= add_grade)
-    calculate_btn = ft.TextButton(content= ft.Text(value=" Посчитать", style= text_theme), style= button_theme, on_click= calculate)
+    row2 = ft.Row()
+    add_grade = ft.TextButton(content= ft.Text(value= "Добавить оценку", style= text_theme), style= button_theme, on_click= add_grade, width= 100)
+    calculate_btn = ft.TextButton(content= ft.Text(value=" Посчитать", style= text_theme), style= button_theme, on_click= calculate, width= 104)
 
-    row.controls = [add_grade, calculate_btn, label_vt, label_result] 
-    
+    row.controls = [add_grade, calculate_btn] 
+    row2.controls = [label_vt, label_result]
     page.add(
         ft.SafeArea(
             expand=False,
@@ -57,6 +58,7 @@ def main(page: ft.Page):
             ),
         )
     )
+    page.add(row2)
     calculate(0)
 
 
