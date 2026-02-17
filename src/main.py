@@ -29,7 +29,7 @@ def main(page: ft.Page):
             try:
                 g = float(grade_txt.value)
                 weight = float(weight_txt.value)
-                gr += g
+                gr += g*weight
                 w += weight
             except ValueError:
                 pass
