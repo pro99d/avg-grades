@@ -5,6 +5,8 @@ def main(page: ft.Page):
     button_theme = ft.ButtonStyle(ft.Colors.BLACK, ft.Colors.BLUE_500)
     text_theme = ft.TextStyle(15)
     grades: list[tuple[ft.TextField, ft.TextField]] = []
+    main_col = ft.Column(scroll= ft.ScrollMode.ALWAYS, height= 180)
+    # scroll = ft.ScrollableControl(data)
     def add_grade(e):
         row = ft.Row()
         def delete(e):
@@ -16,8 +18,7 @@ def main(page: ft.Page):
         delete_btn = ft.IconButton(icon= ft.icons.Icons.DELETE, on_click= delete)
         row.controls = [grade_txt, weight, delete_btn]
         grades.append((grade_txt, weight))
-        print("added")
-        page.insert(0, row)
+        main_col.controls.insert(0, row)
         page.update()
 
     label_vt = ft.Text(value= "Средний балл: ", style= text_theme)
@@ -49,15 +50,8 @@ def main(page: ft.Page):
 
     row.controls = [add_grade, calculate_btn] 
     row2.controls = [label_vt, label_result]
-    page.add(
-        ft.SafeArea(
-            expand=False,
-            content=ft.Container(
-                content=row,
-                alignment=ft.Alignment.CENTER,
-            ),
-        )
-    )
+    page.add(main_col)
+    page.add(row)
     page.add(row2)
     calculate(0)
 
