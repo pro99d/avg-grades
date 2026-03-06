@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.14"]
+        python-version: ["3.13"]
 
     steps:
       - name: Checkout repository
@@ -30,7 +30,7 @@ jobs:
           version: "latest"
 
       - name: Install dependencies
-        run: uv sync --frozen
+        run: uv sync
 
       - name: Install Nuitka and build tools
         run: |
