@@ -10,8 +10,9 @@ def main(page: ft.Page):
     def add_grade(e):
         row = ft.Row()
         def delete(e):
-            page.remove(row)
-            grades.remove((grade_txt, weight))
+            # page.remove(row)
+            main_col.controls.remove(row)
+            # main_col.remove((grade_txt, weight))
             page.update()
         grade_txt = ft.TextField(label= "Оценка", value= "4", on_change= calculate, width= 100)
         weight = ft.TextField(label= "Вес", value= "1", on_change= calculate, width= 100)
