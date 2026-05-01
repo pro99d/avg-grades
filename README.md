@@ -1,24 +1,26 @@
-# Avg app
+ # Калькулятор Среднего балла
 
-## Run the app
+<!-- ![Android](images/android.jpg) -->
+
+![Linux](images/Linux.png)
+
+## Запустить приложение
 
 ### uv
 
-Run as a desktop app:
+Запустить как desktop-приложение:
 
 ```
 uv run flet run
 ```
 
-Run as a web app:
+запустить как web-приложение:
 
 ```
-uv run flet run --web
+uv run flet run --web --port <порт>
 ```
 
-For more details on running the app, refer to the [Getting Started Guide](https://docs.flet.dev/).
-
-## Build the app
+## Собрать приложение
 
 ### Android
 
@@ -26,36 +28,15 @@ For more details on running the app, refer to the [Getting Started Guide](https:
 flet build apk -v
 ```
 
-For more details on building and signing `.apk` or `.aab`, refer to the [Android Packaging Guide](https://docs.flet.dev/publish/android/).
-
-### iOS
+### iOS (только на macOS)
 
 ```
 flet build ipa -v
 ```
 
-For more details on building and signing `.ipa`, refer to the [iOS Packaging Guide](https://docs.flet.dev/publish/ios/).
-
-### macOS
+### Linux/Windows/macOS
 
 ```
-flet build macos -v
+uv run build.py
 ```
 
-For more details on building macOS package, refer to the [macOS Packaging Guide](https://docs.flet.dev/publish/macos/).
-
-### Linux
-
-```
-flet build linux -v
-```
-
-For more details on building Linux package, refer to the [Linux Packaging Guide](https://docs.flet.dev/publish/linux/).
-
-### Windows
-
-```
-flet build windows -v
-```
-
-For more details on building Windows package, refer to the [Windows Packaging Guide](https://docs.flet.dev/publish/windows/).
