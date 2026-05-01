@@ -4,10 +4,16 @@ def main(page: ft.Page):
     button_theme = ft.ButtonStyle(ft.Colors.BLACK, ft.Colors.BLUE_500)
     text_theme = ft.TextStyle(15)
     grades: list[tuple[ft.TextField, ft.TextField]] = []
-    main_col = ft.Column(scroll=ft.ScrollMode.ALWAYS, height=180)
+    row_refs: list[tuple[ft.Row, ft.TextField, ft.TextField, ft.IconButton]] = []
+    main_col = ft.Column(scroll=ft.ScrollMode.ALWAYS, expand=True)
 
     label_vt = ft.Text(value="Средний балл: ", style=text_theme)
     label_result = ft.Text(value="", style=text_theme)
+    add_btn = ft.TextButton(
+        content=ft.Text(value="Добавить оценку", style=text_theme),
+        style=button_theme,
+        on_click=lambda e: add_grade(),
+    )
 
     def calculate(e=None):
         gr = 0.0
@@ -29,6 +35,28 @@ def main(page: ft.Page):
             label_result.update()
         page.update()
 
+    def get_layout_settings() -> tuple[int, int, int]:
+        width = page.width or page.window.width or 640
+        if width < 420:
+            return 6, 8, 38
+        if width < 720:
+            return 10, 12, 40
+        return 14, 16, 42
+
+    def apply_layout():
+        row_spacing, container_padding, delete_btn_width = get_layout_settings()
+        page.padding = container_padding
+        main_col.spacing = row_spacing
+        for row, grade_txt, weight_txt, delete_btn in row_refs:
+            row.spacing = row_spacing
+            row.expand = True
+            grade_txt.expand = 1
+            weight_txt.expand = 1
+            delete_btn.width = delete_btn_width
+            delete_btn.height = delete_btn_width
+        if page.controls:
+            page.update()
+
     def add_grade(e=None):
         row = ft.Row()
 
@@ -41,15 +69,21 @@ def main(page: ft.Page):
                 if gt is grade_txt and wt is weight_txt:
                     grades.pop(i)
                     break
+            for i, (r, gt, wt, _) in enumerate(row_refs):
+                if r is row and gt is grade_txt and wt is weight_txt:
+                    row_refs.pop(i)
+                    break
             calculate()
             page.update()
 
-        grade_txt = ft.TextField(label="Оценка", value="4", on_change=calculate, width=100)
-        weight_txt = ft.TextField(label="Вес", value="1", on_change=calculate, width=100)
+        grade_txt = ft.TextField(label="Оценка", value="4", on_change=calculate, expand=1)
+        weight_txt = ft.TextField(label="Вес", value="1", on_change=calculate, expand=1)
         delete_btn = ft.IconButton(icon=ft.icons.Icons.DELETE, on_click=delete)
         row.controls = [grade_txt, weight_txt, delete_btn]
         grades.append((grade_txt, weight_txt))
+        row_refs.append((row, grade_txt, weight_txt, delete_btn))
         main_col.controls.insert(0, row)
+        apply_layout()
         page.update()
 
     # create initial rows without calling calculate inside add_grade
@@ -57,22 +91,31 @@ def main(page: ft.Page):
         add_grade()
 
     # Bottom controls
-    row = ft.Row()
-    row2 = ft.Row()
-    add_btn = ft.TextButton(
-        content=ft.Text(value="Добавить оценку", style=text_theme),
-        style=button_theme,
-        on_click=add_grade,
-        width=140,
+    add_btn.expand = True
+    add_btn_row = ft.Row(
+        controls=[add_btn],
+        expand=True,
+    )
+    result_block = ft.Row(
+        controls=[label_vt, label_result],
+        spacing=8,
+        tight=True,
+        alignment=ft.MainAxisAlignment.START,
+    )
+    bottom_panel = ft.Column(
+        controls=[add_btn_row, result_block],
+        spacing=8,
     )
 
-    row.controls = [add_btn, calculate_btn]
-    row2.controls = [label_vt, label_result]
+    def on_resize(e):
+        apply_layout()
+
+    page.on_resize = on_resize
 
     # Add everything to page first, then run an initial calculation
     page.add(main_col)
-    page.add(row)
-    page.add(row2)
+    page.add(bottom_panel)
+    apply_layout()
     calculate()
 
 ft.run(main)
