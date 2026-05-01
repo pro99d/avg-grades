@@ -1,6 +1,7 @@
 import flet as ft
 
 def main(page: ft.Page):
+    page.title = "Калькулятор средневзвешенного балла"
     button_theme = ft.ButtonStyle(ft.Colors.BLACK, ft.Colors.BLUE_500)
     text_theme = ft.TextStyle(15)
     grades: list[tuple[ft.TextField, ft.TextField]] = []

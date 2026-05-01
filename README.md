@@ -1,4 +1,5 @@
  # Калькулятор Среднего балла
+[скачать](https://github.com/pro99d/avg-grades/releases/latest)
 
 <!-- ![Android](images/android.jpg) -->
 <!-- ![Linux](images/Linux.png) -->
