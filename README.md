@@ -1,8 +1,7 @@
  # Калькулятор Среднего балла
 
 <!-- ![Android](images/android.jpg) -->
-
-![Linux](images/Linux.png)
+<!-- ![Linux](images/Linux.png) -->
 
 ## Запустить приложение
 

@@ -9,7 +9,6 @@ authors = [
 ]
 dependencies = [
     "flet>=0.80.5",
-    "pyinstaller>=6.20.0",
 ]
 
 [dependency-groups]
@@ -17,6 +16,7 @@ dev = [
     "flet-cli>=0.80.5",
     "flet-desktop-light>=0.80.5",
     "flet-web>=0.80.5",
+    "pyinstaller>=6.20.0",
 ]
 
 [tool.flet]
