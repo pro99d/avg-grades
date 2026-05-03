@@ -17,7 +17,7 @@ uv run flet run
 запустить как web-приложение:
 
 ```
-uv run flet run --web --port <порт>
+docker compose up
 ```
 
 ## Собрать приложение
