@@ -46,7 +46,14 @@ def main(page: ft.Page):
 
     def apply_layout():
         row_spacing, container_padding, delete_btn_width = get_layout_settings()
-        page.padding = container_padding
+        height = page.height or page.window.height or 800
+        top_padding = max(container_padding, int(height * 0.04))
+        page.padding = ft.padding.only(
+            top=top_padding,
+            left=container_padding,
+            right=container_padding,
+            bottom=container_padding,
+        )
         main_col.spacing = row_spacing
         for row, grade_txt, weight_txt, delete_btn in row_refs:
             row.spacing = row_spacing
