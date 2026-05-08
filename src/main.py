@@ -47,7 +47,7 @@ def main(page: ft.Page):
     def apply_layout():
         row_spacing, container_padding, delete_btn_width = get_layout_settings()
         height = page.height or page.window.height or 800
-        top_padding = max(container_padding, int(height * 0.04))
+        top_padding = max(container_padding, int(height * 0.07))
         page.padding = ft.padding.only(
             top=top_padding,
             left=container_padding,
